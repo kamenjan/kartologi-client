@@ -16,7 +16,7 @@ export default class FileUpload extends Component {
     const data = new FormData()
     data.append('file', this.uploadInput.files[0])
     data.append('filename', this.fileName.value)
-    axios.post('http://localhost:3000/statistic/upload', data)
+    axios.post(`${this.props.apiUrl}/statistic/upload`, data)
     .then( response => {
       console.log(response)
       this.setState({
@@ -36,17 +36,16 @@ export default class FileUpload extends Component {
 
   render() {
     return(
-      <div class="container">
+      <div className={"container"}>
         <form onSubmit={this.handleUpload}>
-          <div className="form-group">
-            <input className="form-control"  ref={(ref) => { this.uploadInput = ref; }} type="file" />
+          <div className={"form-group"}>
+            <input className={"form-control" } ref={(ref) => { this.uploadInput = ref; }} type={"file"} />
           </div>
-          <div className="form-group">
-            <input className="form-control" ref={(ref) => { this.fileName = ref; }} type="text" placeholder="Optional name for the file" />
+          <div className={"form-group"}>
+            <input className={"form-control"} ref={(ref) => { this.fileName = ref; }} type={"text"} placeholder={"Optional name for the file"} />
           </div>
-          <button className="btn btn-success" type>Upload</button>
+          <button className={"btn btn-success"}>Upload</button>
         </form>
-        <div>{ Object.values(this.uploadData) }</div>
       </div>
     )
   }
