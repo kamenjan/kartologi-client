@@ -7,6 +7,7 @@ import history from 'services/history'
 
 import Home from "./scenes/Home/Home"
 import Login from "./scenes/Login/Login"
+import Upload from "./scenes/Upload/Upload"
 
 import Menu from "./components/Menu/Menu"
 
@@ -34,6 +35,15 @@ export default class Main extends Component {
         title: Login.name,
         exact: true,
         path: `/${Login.name}`,
+        ownProps: {
+          nekProp: 0
+        }
+      },
+      {
+        component: Upload,
+        title: Upload.name,
+        exact: true,
+        path: `/${Upload.name}`,
         ownProps: {
           nekProp: 0
         }

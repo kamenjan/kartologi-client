@@ -1,12 +1,13 @@
 import React, { Component } from "react"
 
-import FileUpload from "../../components/FileUpload/FileUpload"
 import axios from "axios/index";
 
 export default class Login extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props);
+    // this.state = {
+    //   jwt: 'nema'
+    // }
   }
 
   handleLogin = event => {
@@ -14,12 +15,45 @@ export default class Login extends Component {
     const data = new FormData()
     data.append('username', this.userNameInput.value)
     data.append('password', this.passwordInput.value)
-    axios.post(`${this.props.apiUrl}/login`, data)
+    axios.post(`${this.props.apiUrl}/users/login`, data)
     .then( response => {
-      console.log(response)
       this.setState({
-        uploadStatus: true
+        jwt: response.data.token
       })
+    })
+    .catch( error => {
+      // console.log(error)
+    })
+  }
+
+  handlePrivatePostApiCall = event => {
+    event.preventDefault()
+    axios.post(`${this.props.apiUrl}/users/private`, this.state.jwt, {
+      headers: {
+        "Authorization": `Token ${this.state.jwt}`
+      }
+    })
+    .then( response => {
+      console.log('--------')
+      console.log(response)
+      console.log('--------')
+    })
+    .catch( error => {
+      console.log(error)
+    })
+  }
+
+  handlePrivateGetApiCall = event => {
+    event.preventDefault()
+    axios.get(`${this.props.apiUrl}/users/private`, {
+      headers: {
+        "Authorization": `Token ${this.state.jwt}`
+      }
+    })
+    .then( response => {
+      console.log('--------')
+      console.log(response)
+      console.log('--------')
     })
     .catch( error => {
       console.log(error)
@@ -38,6 +72,8 @@ export default class Login extends Component {
           </div>
           <button className={"btn btn-success"}>Login</button>
         </form>
+        <button className={"btn"} onClick={this.handlePrivatePostApiCall}>Private POST api call</button>
+        <button className={"btn"} onClick={this.handlePrivateGetApiCall}>Private GET api call</button>
       </div>
     )
   }
