@@ -6,7 +6,7 @@ scenes
     Home
     Calendar
     Post
-    Login
+    Upload
     Admin
     
 components
