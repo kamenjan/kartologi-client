@@ -23,34 +23,35 @@ export default class Main extends Component {
     this.routes = [
       {
         component: Home,
-        title: Home.name,
+        title: 'home',
         exact: true,
-        path: `/${Home.name}`,
+        path: `/`,
         ownProps: {
           nekProp: 0
         }
       },
       {
         component: Login,
-        title: Login.name,
+        title: 'login',
         exact: true,
-        path: `/${Login.name}`,
+        path: `/login`,
         ownProps: {
           nekProp: 0
         }
       },
       {
         component: Upload,
-        title: Upload.name,
+        title: 'upload',
         exact: true,
-        path: `/${Upload.name}`,
+        path: `/upload`,
         ownProps: {
           nekProp: 0
         }
       }
     ]
 
-    this.apiUrl = `http://localhost:3000`
+    this.apiUrl = `http://localhost:3000/api`
+    // this.apiUrl = `https://kartologi.kancelarija.tech`
 
   }
 

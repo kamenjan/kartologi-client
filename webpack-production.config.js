@@ -42,6 +42,7 @@ baseConfig.plugins.push(
 	})
 );
 
+// NOTE: this messes up some of the variables in components (component.name ...)
 baseConfig.plugins.push(
 	new UglifyJSPlugin({
 		// enforce: 'post',

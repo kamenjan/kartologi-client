@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 
-import axios from "axios/index";
+import axios from "axios/index"
+import cookieClient from 'react-cookie'
 
 export default class Login extends Component {
   constructor(props) {
@@ -15,48 +16,39 @@ export default class Login extends Component {
     const data = new FormData()
     data.append('username', this.userNameInput.value)
     data.append('password', this.passwordInput.value)
-    axios.post(`${this.props.apiUrl}/users/login`, data)
+    axios.post(`/api/user/login`, data)
     .then( response => {
-      this.setState({
-        jwt: response.data.token
-      })
+      console.log('--------')
+      console.log('response:')
+      console.log(response)
+      console.log('--------')
+
+      if (response.data.loggedIn) {
+        // user was successfully logged in, show admin panel
+      }
     })
     .catch( error => {
-      // console.log(error)
+      console.log('--------')
+      console.log('error:')
+      console.log(error)
+      console.log('--------')
     })
   }
 
-  handlePrivatePostApiCall = event => {
+  handleLogout = event => {
     event.preventDefault()
-    axios.post(`${this.props.apiUrl}/users/private`, this.state.jwt, {
-      headers: {
-        "Authorization": `Token ${this.state.jwt}`
-      }
-    })
+    axios.get(`api/user/logout`)
     .then( response => {
       console.log('--------')
+      console.log('response:')
       console.log(response)
       console.log('--------')
     })
     .catch( error => {
-      console.log(error)
-    })
-  }
-
-  handlePrivateGetApiCall = event => {
-    event.preventDefault()
-    axios.get(`${this.props.apiUrl}/users/private`, {
-      headers: {
-        "Authorization": `Token ${this.state.jwt}`
-      }
-    })
-    .then( response => {
       console.log('--------')
-      console.log(response)
-      console.log('--------')
-    })
-    .catch( error => {
+      console.log('error:')
       console.log(error)
+      console.log('--------')
     })
   }
 
@@ -72,8 +64,9 @@ export default class Login extends Component {
           </div>
           <button className={"btn btn-success"}>Login</button>
         </form>
-        <button className={"btn"} onClick={this.handlePrivatePostApiCall}>Private POST api call</button>
-        <button className={"btn"} onClick={this.handlePrivateGetApiCall}>Private GET api call</button>
+        <div>
+          <button className={"btn"} onClick={this.handleLogout}>Logout</button>
+        </div>
       </div>
     )
   }

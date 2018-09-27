@@ -7,7 +7,7 @@
     "start": "npm run serve-dev",
     "build": "webpack --config webpack-production.config.js",
     "serve-dev": "webpack-dev-server --config webpack-development.config.js --open",
-    "serve-prod": "serve dist/",
+    "serve-prod": "serve -u dist/",
     "clean": "rm -rf ./node_modules"
   },
   "repository": {
@@ -49,6 +49,7 @@
     "history": "4.7.2",
     "lodash": "4.17.10",
     "react": "^16.2.0",
+    "react-cookie": "3.0.4",
     "react-dom": "^16.2.0",
     "react-router-dom": "4.3.1"
   }
