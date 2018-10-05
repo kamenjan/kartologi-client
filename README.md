@@ -48,6 +48,7 @@ this functionality is incompatible with my idea of express server side authoriza
 2. **pwa client (public), express server (api+admin gui)**
     * this might be the way but not by combining different front end methodologies. if im using react for pwa client, i sure do not want to write Pug/Jade templates for the admin panel GUI which will undoubtedly share at least styles with public pwa client. i should implement react server side rendering but that still does not solve shared resources issue.
 3. **something that makes perfect sense be here**
+    * okey, humor me for a second... if I manage to exclude /admin from PWA i can force users client to ask express server for /admin route, express in return authorizes the request and (TODO: and what? back to static route? get this cleared)
  
 
 
